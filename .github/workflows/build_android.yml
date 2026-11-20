@@ -25,7 +25,9 @@ jobs:
           channel: 'stable'
 
       - name: Generate Android platform files
-        run: flutter create --platforms=android .
+        run: |
+          flutter create --platforms=android .
+          rm -rf test
 
       - name: Set App Display Name
         run: sed -i 's/android:label="[^"]*"/android:label="تدوين"/g' android/app/src/main/AndroidManifest.xml
@@ -34,7 +36,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Android Release APK
-        run: flutter build apk --release --no-shrink --verbose
+        run: flutter build apk --release --no-shrink
 
       - name: Rename APK
         run: mv build/app/outputs/flutter-apk/app-release.apk tadween.apk
