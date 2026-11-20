@@ -14,7 +14,7 @@ class NotesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const CupertinoApp(
       debugShowCheckedModeBanner: false,
-      title: 'مفكرتي',
+      title: 'تدوين',
       theme: CupertinoThemeData(
         brightness: Brightness.light,
         primaryColor: Color(0xFFD4A000),
@@ -91,7 +91,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
   }
 
   void _openEditor({Note? existingNote}) async {
-    final result = await Navigator.push>(
+    final result = await Navigator.push(
       context,
       CupertinoPageRoute(
         builder: (context) => Directionality(
@@ -101,7 +101,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
       ),
     );
 
-    if (result != null) {
+    if (result != null && result is Map<String, dynamic>) {
       setState(() {
         if (result['action'] == 'delete' && existingNote != null) {
           _notes.removeWhere((n) => n.id == existingNote.id);
@@ -139,7 +139,7 @@ class _NotesHomePageState extends State<NotesHomePage> {
 
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
-        middle: const Text('الملاحظات'),
+        middle: const Text('تدوين'),
         trailing: CupertinoButton(
           padding: EdgeInsets.zero,
           child: const Icon(CupertinoIcons.square_pencil, size: 26),
